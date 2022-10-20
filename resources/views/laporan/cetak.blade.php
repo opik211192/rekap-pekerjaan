@@ -7,6 +7,10 @@
     <title>Laporan Rekap Pekerjaan {{ $paket->name }}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
     <style>
+        html *
+        {
+            font-family: Arial !important;
+        }
         .table{
             font-size: 15PX;
         }
@@ -18,15 +22,29 @@
         .table-bordered{
             border: 1px solid $gray-300 !important;
         }
+
+        .borderless td, .borderless th {
+            border: none;
+        }
+        
+        hr {
+            border: 1px solid;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <h4 class="text-center">DATA REKAP PEKERJAAN</h4>
-        </div>
+    <div class="container-fluid row">
+        <table class="table borderless">
+            <tr>
+                <td style="width: 170px"><img src="{{ asset('public/logo/logo.png') }}" class="img-fluid" alt="logo" style="width: 62px; height: 60px"></td>
+                <td> <h4 class="">DATA REKAP PEKERJAAN</h4></td>
+                <td></td>
+            </tr>
+        </table>
+        
+        <hr>      
     </div>
-    <div class="container-fluid mt-4">
+    <div class="container-fluid">
         <div class="row align-items-start">
             <table class="table-sm">
                 <tr>
@@ -39,6 +57,21 @@
                     <td>:</td>
                     <td>{{ $paket->tahun_anggaran }}</td>
                 </tr>
+                <tr>
+                    <td><strong>Nomor Kontrak</strong></td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Tanggal Kontrak</strong></td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Penyedia Jasa</strong></td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
             </table>
         </div>
 
@@ -46,13 +79,19 @@
             <table class="table-sm" border="1">
                 <tr>
                     <th style="width: 25px" class="text-center">No</th>
-                    <th style="width: 470px" class="text-center">Nama Bangunan</th>
-                    <th style="width:175px" class="text-center">Status Konstruksi</th>
+                    <th style="width: 180px" class="text-center">Nama Bangunan</th>
+                    <th style="width: 100px" class="text-center">Desa</th>
+                    <th style="width: 100px" class="text-center">Kecamatan</th>
+                    <th style="width: 100px" class="text-center">Kab/Kota</th>
+                    <th style="width:140px" class="text-center">Status Konstruksi</th>
                 </tr>
                 @foreach ($bangunans as $index => $item)
                     <tr>    
                         <td class="text-center">{{ $index + 1  }}</td>
                         <td>{{ $item->name }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         
                             @if ($item->status != 0)
                                 <td>Terbangun Tahun {{ $item->tahun_konstruksi }}</td>
