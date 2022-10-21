@@ -9,16 +9,11 @@
 
 @section('styles')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .cap   { text-transform: capitalize; }
+    </style>
 @endsection
 
-@push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.select2').select2();
-        });
-    </script>
-@endpush
 
 
 @section('content')
@@ -45,6 +40,41 @@
                     @error('name')
                     <div class="text-danger mt-2">{{ $message }}</div>
                 @enderror
+                </div>
+                <div class="form-group row">
+                    <label for="provinsi">Provinsi</label>
+                    
+                        <select class="form-control" name="province_id" id="province_id" required>
+                            <option>--Pilih Salah Satu--</option>
+                            @foreach ($provinsi as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    
+                </div>
+                <div class="form-group row">
+                    <label for="kota">Kabupaten / Kota</label>
+                    
+                        <select class="form-control" name="city_id" id="city_id" required>
+                            <option>--Pilih Salah Satu--</option>
+                        </select>
+                   
+                </div>
+                <div class="form-group row">
+                    <label for="kecamatan">Kecamatan</label>
+                    
+                        <select class="form-control" name="district_id" id="district_id" required>
+                            <option>--Pilih Salah Satu--</option>
+                        </select>
+                   
+                </div>
+                <div class="form-group row">
+                    <label for="desa">Desa</label>
+                    
+                        <select class="form-control" name="village_id" id="village_id" required>
+                            <option>--Pilih Salah Satu--</option>
+                        </select>
+                    
                 </div>
                 <div class="form-group">
                     <label>Status Konstruksi</label>
@@ -112,6 +142,8 @@
     </script> --}}
     <script>
     $(document).ready(function(){
+
+        
         $('input[type=radio][name=status]').change(function(){
             if(this.value == '0'){
                 $('#tahun_konstruksi_label').attr('hidden',true);
@@ -139,3 +171,46 @@
     
 </script>
 @stop
+@push('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+
+            function onChangeSelect(url, id, name) {
+            // send ajax request to get the cities of the selected province and append to the select tag
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    $('#' + name).empty();
+                    $('#' + name).append('<option>--Pilih Salah Satu--</option>');
+
+                    $.each(data, function (key, value) {
+                        $('#' + name).append('<option value="' + key + '">' + value + '</option>');
+                    });
+                }
+            });
+        }
+        $(function () {
+            $('#province_id').on('change', function () {
+                onChangeSelect('{{ route("cities") }}', $(this).val(), 'city_id');
+            });
+            $('#city_id').on('change', function () {
+                onChangeSelect('{{ route("districts") }}', $(this).val(), 'district_id');
+            })
+            $('#district_id').on('change', function () {
+                onChangeSelect('{{ route("villages") }}', $(this).val(), 'village_id');
+            })
+        });
+
+
+        });
+    </script>
+@endpush
+

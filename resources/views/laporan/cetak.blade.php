@@ -30,6 +30,9 @@
         hr {
             border: 1px solid;
         }
+        table table-bordered > thead > tr > th{
+  border:3px solid black;
+}
     </style>
 </head>
 <body>
@@ -46,29 +49,29 @@
     </div>
     <div class="container-fluid">
         <div class="row align-items-start">
-            <table class="table-sm">
+            <table class="table-sm borderless">
                 <tr>
-                    <td style="width: 120px" class="align-text-top"><strong>Nama Paket</strong></td>
+                    <td style="width: 120px" class="align-text-top">Nama Paket></td>
                     <td class="align-text-top">:</td>
                     <td>{{ $paket->name }}</td>
                 </tr>
                 <tr>
-                    <td><strong>Tahun Anggaran</strong></td>
+                    <td>Tahun Anggaran</td>
                     <td>:</td>
                     <td>{{ $paket->tahun_anggaran }}</td>
                 </tr>
                 <tr>
-                    <td><strong>Nomor Kontrak</strong></td>
+                    <td>Nomor Kontrak</td>
                     <td>:</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td><strong>Tanggal Kontrak</strong></td>
+                    <td>Tanggal Kontrak</td>
                     <td>:</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td><strong>Penyedia Jasa</strong></td>
+                    <td>Penyedia Jasa</td>
                     <td>:</td>
                     <td></td>
                 </tr>
@@ -76,7 +79,7 @@
         </div>
 
         <div class="row mt-5 table-responsive">
-            <table class="table-sm" border="1">
+            <table class="table table-sm table-bordered">
                 <tr>
                     <th style="width: 25px" class="text-center">No</th>
                     <th style="width: 180px" class="text-center">Nama Bangunan</th>

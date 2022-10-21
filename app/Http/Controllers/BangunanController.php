@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bangunan;
 use App\Models\Paket;
 use Illuminate\Http\Request;
+use Laravolt\Indonesia\Models\Province;
 use yajra\Datatables\Datatables;
 
 
@@ -49,8 +50,9 @@ class BangunanController extends Controller
 
     public function create()
     {
+        $provinsi = Province::all();
         $pakets = Paket::all();
-        return view('bangunan.create', compact('pakets'));
+        return view('bangunan.create', compact('pakets', 'provinsi'));
     }
 
     public function store(Request $request)
@@ -58,13 +60,18 @@ class BangunanController extends Controller
         $validateData = $request->validate([
             'paket_id' => 'required',
             'name' => 'required',
+            'province_id' => 'required',
+            'city_id' => 'required',
+            'district_id' => 'required',
+            'village_id' => 'required',
             'status' => 'required',
             // 'tahun_konstruksi' => 'required',
         ]);
+
         $validateData['tahun_konstruksi'] = $request->tahun_konstruksi;
         Bangunan::create($validateData);
         return redirect()->route('bangunan.index')->with('success', 'Data berhasil ditambahkan');
-        //dd($request);
+        dd($request);
     }
 
     public function edit(Bangunan $bangunan)

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BangunanController;
+use App\Http\Controllers\DependentDropdownController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\UserController;
@@ -26,6 +27,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('provinces', [DependentDropdownController::class, 'provinces'])->name('provinces');
+Route::get('cities', [DependentDropdownController::class, 'cities'])->name('cities');
+Route::get('districts', [DependentDropdownController::class, 'districts'])->name('districts');
+Route::get('villages', [DependentDropdownController::class, 'villages'])->name('villages');
 
 Route::middleware('auth')->prefix('paket')->group(function(){
     Route::get('', [PaketController::class, 'index'])->name('paket.index');
@@ -43,6 +48,7 @@ Route::middleware('auth')->prefix('bangunan')->group(function(){
     Route::get('/edit/{bangunan}', [BangunanController::class, 'edit'])->name('bangunan.edit');
     Route::put('/edit/{bangunan}', [BangunanController::class, 'update']);
     Route::delete('/{bangunan}', [BangunanController::class, 'delete'])->name('bangunan.delete');
+
 });
 
 Route::middleware('auth')->prefix('laporan')->group(function(){
