@@ -43,7 +43,11 @@ class PaketController extends Controller
         $validateData = $request->validate([
             'tahun_anggaran' => 'required',
             'name' => 'required',
+            'no_kontrak' => '',
+            'tgl_kontrak' => '',
+            'penyedia_jasa' => '',
         ]);
+        
 
         Paket::create($validateData);
         return redirect()->route('paket.index')->with('success', 'Data berhasil ditambah');
@@ -59,6 +63,9 @@ class PaketController extends Controller
         $validateData = $request->validate([
             'tahun_anggaran' => 'required',
             'name' => 'required',
+            'no_kontrak' => '',
+            'tgl_kontrak' => '',
+            'penyedia_jasa' => '',
         ]);
 
         $paket->update($validateData);

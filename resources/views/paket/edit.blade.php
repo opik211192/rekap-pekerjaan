@@ -34,6 +34,21 @@
                 @enderror
                 </div>
 
+                <div class="form-group row">
+                    <label for="no_kontrak">No. Kontrak</label>
+                    <input type="text" class="form-control" id="no_kontrak" value="{{ old('no_kontrak') ?? $paket->no_kontrak }}" name="no_kontrak">
+                </div>
+
+                <div class="form-group row">
+                    <label for="tgl_kontrak">Tanggal Kontrak</label>
+                    <input type="date" class="form-control" id="tgl_kontrak" value="{{ old('tgl_kontrak') ?? $paket->tgl_kontrak }}" name="tgl_kontrak">
+                </div>
+
+                <div class="form-group row">
+                    <label for="penyedia_jasa">Penyedia Jasa</label>
+                    <input type="text" class="form-control" id="penyedia_jasa" value="{{ old('penyedia_jasa') ?? $paket->penyedia_jasa }}" name="penyedia_jasa">
+                </div>
+
                 <button class="btn btn-sm btn-primary row">Update</button>
             </form>
         </div>

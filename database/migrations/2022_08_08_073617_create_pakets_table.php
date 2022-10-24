@@ -17,6 +17,9 @@ class CreatePaketsTable extends Migration
             $table->id();
             $table->string('tahun_anggaran');
             $table->string('name');
+            $table->string('no_kontrak')->nullable();
+            $table->date('tgl_kontrak')->nullable();
+            $table->string('penyedia_jasa')->nullable();
             $table->timestamps();
         });
     }
