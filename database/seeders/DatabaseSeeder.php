@@ -17,15 +17,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        $this->call(UserSeeder::class);
-        $this->call(PaketSeeder::class);
-        $this->call(BangunanSeeder::class);
         $this->call([
             ProvincesSeeder::class,
             CitiesSeeder::class,
             DistrictsSeeder::class,
             VillagesSeeder::class,
         ]);
+        $this->call(UserSeeder::class);
+        $this->call(PaketSeeder::class);
+        $this->call(BangunanSeeder::class);
 
     }
 }
