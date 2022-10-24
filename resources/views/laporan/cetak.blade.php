@@ -10,17 +10,11 @@
         html *
         {
             font-family: Arial !important;
-        }
-        .table{
-            font-size: 15PX;
+            
         }
 
         .table-sm{
             font-size: 14PX;
-        }
-
-        .table-bordered{
-            border: 1px solid $gray-300 !important;
         }
 
         .borderless td, .borderless th {
@@ -39,8 +33,8 @@
     <div class="container-fluid row">
         <table class="table borderless">
             <tr>
-                <td style="width: 170px"><img src="{{ asset('public/logo/logo.png') }}" class="img-fluid" alt="logo" style="width: 62px; height: 60px"></td>
-                <td> <h4 class="">DATA REKAP PEKERJAAN</h4></td>
+                <td style="width: 60px"><img src="{{ asset('public/logo/logo.png') }}" class="img-fluid" alt="logo" style="width: 62px; height: 60px"></td>
+                <td class="text-center"> <h4 class="">DATA REKAP PEKERJAAN</h4><h4>PPK PERENCANAAN & PROGRAM</h4></td>
                 <td></td>
             </tr>
         </table>
@@ -51,7 +45,7 @@
         <div class="row align-items-start">
             <table class="table-sm borderless">
                 <tr>
-                    <td style="width: 120px" class="align-text-top">Nama Paket></td>
+                    <td style="width: 120px" class="align-text-top">Nama Paket</td>
                     <td class="align-text-top">:</td>
                     <td>{{ $paket->name }}</td>
                 </tr>
@@ -63,23 +57,23 @@
                 <tr>
                     <td>Nomor Kontrak</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{ $paket->no_kontrak }}</td>
                 </tr>
                 <tr>
                     <td>Tanggal Kontrak</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{  date("d/m/Y", strtotime($paket->tgl_kontrak)) }}</td>
                 </tr>
                 <tr>
                     <td>Penyedia Jasa</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{ $paket->penyedia_jasa }}</td>
                 </tr>
             </table>
         </div>
 
         <div class="row mt-5 table-responsive">
-            <table class="table table-sm table-bordered">
+            <table class="table-sm" border="1">
                 <tr>
                     <th style="width: 25px" class="text-center">No</th>
                     <th style="width: 180px" class="text-center">Nama Bangunan</th>
@@ -92,9 +86,9 @@
                     <tr>    
                         <td class="text-center">{{ $index + 1  }}</td>
                         <td>{{ $item->name }}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ ucwords(strtolower($item->village->name)) }}</td>
+                        <td>{{ ucwords(strtolower($item->district->name)) }}</td>
+                        <td>{{ ucwords(strtolower($item->city->name)) }}</td>
                         
                             @if ($item->status != 0)
                                 <td>Terbangun Tahun {{ $item->tahun_konstruksi }}</td>

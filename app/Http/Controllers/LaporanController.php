@@ -22,11 +22,13 @@ class LaporanController extends Controller
     {
         //dd($request->filter_paket);
         $paket = Paket::with('bangunans')->where('id','=', $request->filter_paket)->first();
-        $bangunans = Bangunan::with('paket')->where('paket_id','=', $request->filter_paket)->get();
+        $bangunans = Bangunan::with('paket', 'province', 'city', 'district', 'village')->where('paket_id','=', $request->filter_paket)->get();
         $pdf = PDF::loadview('laporan.cetak', compact('paket', 'bangunans'));
         $pdf->getDomPDF()->set_option("enable_php", true);
         return $pdf->stream($paket->name.".pdf");
-        //dd($title);
-      
+        //dd($bangunans);
+        // foreach ($bangunans as $key => $b) {
+        //     echo $b->name." ".ucwords(strtolower($b->province->name))." ".ucwords(strtolower($b->city->name))."<br>";
+        // }
     }
 }
